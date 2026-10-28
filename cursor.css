@@ -1,0 +1,73 @@
+/* ===== Custom cursor : Development & Design ===== */
+@property --gs{syntax:'<number>';inherits:true;initial-value:1}
+.ddc{--ddc-cyan:94,196,226;--ddc-navy:6,26,69;position:fixed;left:0;top:0;width:0;height:0;z-index:2147483647;pointer-events:none;opacity:0;transition:opacity .25s ease}
+.ddc.on{opacity:1}
+/* when the browser supports it the cursor lives in the top layer, above dialogs, modals and popovers */
+.ddc[popover]{position:fixed;inset:auto;left:0;top:0;width:0;height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;background:none;color:inherit;overflow:visible}
+.ddc,.ddc *{pointer-events:none!important}
+/* native cursor: hidden on every element, every pseudo-element, in every state.
+   Vendor-specific pseudo-elements live in their own rules so an unknown one cannot invalidate the others. */
+html.ddc-on,html.ddc-on *,html.ddc-on *::before,html.ddc-on *::after,html.ddc-on *::marker{cursor:none!important}
+html.ddc-on *::-webkit-details-marker{cursor:none!important}
+html.ddc-on *::file-selector-button{cursor:none!important}
+html.ddc-on *::backdrop{cursor:none!important}
+/* same rule in a cascade layer: layered !important beats any unlayered !important (e.g. .btn:hover{cursor:pointer!important}) */
+@layer ddc-cursor{html.ddc-on,html.ddc-on *,html.ddc-on *::before,html.ddc-on *::after,html.ddc-on *::marker{cursor:none!important}}
+html.ddc-on img{-webkit-user-drag:none;user-drag:none}
+
+.ddc__trail{position:fixed;left:0;top:0;width:100vw;height:100vh}
+.ddc__ring,.ddc__dot,.ddc__pulses{position:fixed;left:0;top:0;width:0;height:0}
+.ddc__ring,.ddc__dot{will-change:transform}
+
+/* ring */
+.ddc__shape{--s:1;--r:0deg;--p:1;--gs:1;position:absolute;left:-17px;top:-17px;width:34px;height:34px;box-sizing:border-box;border-radius:50%;
+border:1.5px solid rgba(var(--ddc-cyan),.85);
+background:radial-gradient(circle,rgba(var(--ddc-navy),.15) 0%,rgba(var(--ddc-navy),.55) 100%);
+transform:rotate(var(--r)) scale(calc(var(--s) * var(--p)));
+transition:transform .38s cubic-bezier(.2,.8,.2,1),border-radius .38s ease,border-color .3s ease,background .35s ease,--gs .4s ease;
+animation:ddc-breathe 4.2s ease-in-out infinite}
+.ddc__shape::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid transparent;border-top-color:rgba(var(--ddc-cyan),.75);border-bottom-color:rgba(var(--ddc-cyan),.75);animation:ddc-spin 9s linear infinite;transition:opacity .3s ease}
+@keyframes ddc-breathe{
+0%,100%{box-shadow:0 0 calc(10px * var(--gs)) rgba(var(--ddc-cyan),calc(.22 * var(--gs))),inset 0 0 calc(6px * var(--gs)) rgba(var(--ddc-cyan),calc(.14 * var(--gs)))}
+50%{box-shadow:0 0 calc(20px * var(--gs)) rgba(var(--ddc-cyan),calc(.42 * var(--gs))),inset 0 0 calc(10px * var(--gs)) rgba(var(--ddc-cyan),calc(.26 * var(--gs)))}}
+@keyframes ddc-spin{to{transform:rotate(360deg)}}
+
+/* precise dot */
+.ddc__dot i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;box-sizing:border-box;border-radius:50%;background:#A9ECF9;border:1.5px solid #061A45;box-shadow:0 0 8px 1px rgba(var(--ddc-cyan),.85);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+
+/* labels */
+.ddc__label{position:absolute;left:0;top:0;width:0;height:0}
+.ddc__label span{position:absolute;left:0;top:0;display:block;transform:translate(-50%,-50%) scale(.7);opacity:0;color:#fff;font:600 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:.06em;white-space:nowrap;transition:opacity .25s ease,transform .35s cubic-bezier(.2,.8,.2,1)}
+.ddc__a svg{display:block;color:#A9ECF9}
+
+/* states */
+.ddc[data-cur="btn"] .ddc__shape{--s:1.6;--gs:1.7;border-color:rgba(170,236,250,.95);background:radial-gradient(circle,rgba(var(--ddc-cyan),.22) 0%,rgba(var(--ddc-navy),.45) 100%)}
+.ddc[data-cur="btn"] .ddc__dot i{transform:scale(.7)}
+.ddc[data-cur="link"] .ddc__shape{--s:1.25;--r:45deg;--gs:1.4;border-radius:10px;border-color:rgba(170,236,250,.95)}
+.ddc[data-cur="link"] .ddc__shape::before,.ddc[data-cur="view"] .ddc__shape::before{opacity:0}
+.ddc[data-cur="link"] .ddc__dot i,.ddc[data-cur="view"] .ddc__dot i{transform:scale(0)}
+.ddc[data-cur="link"] .ddc__a{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ddc[data-cur="view"] .ddc__shape{--s:2.3;--gs:1.8;border-color:rgba(170,236,250,.9);background:radial-gradient(circle at 35% 30%,rgba(var(--ddc-cyan),.9) 0%,rgba(var(--ddc-navy),.96) 100%)}
+.ddc[data-cur="view"] .ddc__v{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ddc[data-down] .ddc__shape{--p:.84}
+
+/* click pulse */
+.ddc__pulse{position:fixed;width:0;height:0}
+.ddc__pulse::before{content:"";position:absolute;left:-30px;top:-30px;width:60px;height:60px;box-sizing:border-box;border-radius:50%;border:1.5px solid rgba(170,236,250,.95);background:radial-gradient(circle,rgba(var(--ddc-cyan),.35) 0%,rgba(var(--ddc-cyan),0) 70%);box-shadow:0 0 18px rgba(var(--ddc-cyan),.6);animation:ddc-pulse .65s cubic-bezier(.16,.7,.3,1) forwards}
+@keyframes ddc-pulse{0%{opacity:1;transform:scale(.2)}100%{opacity:0;transform:scale(1.35)}}
+
+/* light theme */
+:root[data-theme="light"] .ddc__shape{border-color:rgba(6,26,69,.7);background:radial-gradient(circle,rgba(var(--ddc-cyan),.12) 0%,rgba(var(--ddc-cyan),.3) 100%)}
+:root[data-theme="light"] .ddc[data-cur="btn"] .ddc__shape,:root[data-theme="light"] .ddc[data-cur="link"] .ddc__shape{border-color:rgba(6,26,69,.9)}
+:root[data-theme="light"] .ddc[data-cur="view"] .ddc__shape{border-color:rgba(6,26,69,.9);background:radial-gradient(circle at 35% 30%,rgba(var(--ddc-cyan),.95) 0%,rgba(var(--ddc-navy),.96) 100%)}
+
+/* reduced motion: exact follow, no trail, no breathing, no transitions */
+.ddc.calm,.ddc.calm *,.ddc.calm *::before{animation:none!important;transition:none!important}
+.ddc.calm .ddc__trail,.ddc.calm .ddc__pulses{display:none}
+.ddc.calm .ddc__shape::before{display:none}
+.ddc.calm .ddc__shape{box-shadow:0 0 12px rgba(var(--ddc-cyan),.3)}
+@media (prefers-reduced-motion:reduce){.ddc__shape,.ddc__shape::before,.ddc__pulse::before{animation:none!important}}
+
+/* print: never shown. Touch devices: cursor.js never creates the cursor, so the system cursor is untouched. */
+@media print{.ddc{display:none!important}}
+/* ===== /Custom cursor ===== */
