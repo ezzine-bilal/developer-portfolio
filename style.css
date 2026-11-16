@@ -18,3 +18,4 @@ h1,h2,h3,p{margin-top:0}h1,h2,h3{letter-spacing:-.052em;line-height:1.15}h1{font
 .reveal.is-visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 @media (max-width:700px){.skills-grid .skill-tile:last-child:nth-child(odd){grid-column:auto}}
+.project-grid-single{grid-template-columns:1fr!important}

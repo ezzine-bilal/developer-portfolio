@@ -18,4 +18,4 @@ PUBLICATION SUR GITHUB PAGES : déposer tous les fichiers à la racine du dépô
 - Les dates et intitulés de poste (notamment « Stagiaire Assistant Manager de Production », juin 2026 — aujourd'hui).
 - Le numéro de téléphone, visible publiquement sur la page Contact.
 - Les CV PDF/Word, à aligner avec le contenu du site.
-- Le suivi des consommables est présenté comme un concept proposé, non comme un projet déployé ; les interfaces des projets sont des illustrations, pas des captures d'écran.
+- L'interface du projet EasyHire est une illustration, pas une capture d'écran.
