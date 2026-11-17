@@ -15,7 +15,7 @@ FONCTIONNALITÉS : français par défaut avec bouton FR/EN, mode clair/sombre, n
 PUBLICATION SUR GITHUB PAGES : déposer tous les fichiers à la racine du dépôt, puis activer GitHub Pages (Settings > Pages > Deploy from a branch).
 
 À VÉRIFIER AVANT PUBLICATION
-- Les dates et intitulés de poste (notamment « Stagiaire Assistant Manager de Production », juin 2026 — aujourd'hui).
+- Les dates et intitulés de poste (notamment « Stagiaire Assistant Manager de Production », octobre 2026 — aujourd'hui).
 - Le numéro de téléphone, visible publiquement sur la page Contact.
 - Les CV PDF/Word, à aligner avec le contenu du site.
 - L'interface du projet EasyHire est une illustration, pas une capture d'écran.
